@@ -34,8 +34,24 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("Test para validar cuando la cadena esta separada por saltos de linea")
-    void testCadenaCualquierVaina()throws Exception{
-        assertEquals(calculator.stringCalculator("2h2"), 4);
+    @DisplayName("Test para validar cuando la cadena tiene tres numeros separados por cualquier caracter")
+    void testCadenaOtrosCaracteres()throws Exception{
+        assertEquals(calculator.stringCalculator("2h2#2"), 6);
+    }
+
+    @Test
+    @DisplayName("Test para validar cuando la cadena recibe numeros negativos")
+    void testCadenaNumerosNegativos(){
+        Exception thrown = assertThrows(Exception.class, () ->
+                calculator.stringCalculator("-1"));
+        assertEquals("Los numeros negativos no aplican", thrown.getMessage());
+    }
+
+    @Test
+    @DisplayName("Test para validar cuando la cadena recibe numeros mayores a 1000")
+    void testCadenaNumeroMayorAMil(){
+        Exception thrown = assertThrows(Exception.class, () ->
+                calculator.stringCalculator("2000"));
+        assertEquals("Los valores > a Mil no aplican", thrown.getMessage());
     }
 }
